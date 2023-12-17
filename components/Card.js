@@ -26,14 +26,6 @@ const Card = ({ card, onEdit, onRemove }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={handleEdit} style={styles.editButton}>
-        <Text>{isEditing ? "Save" : "Edit"}</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={handleRemove} style={styles.removeButton}>
-        <Text>Remove</Text>
-      </TouchableOpacity>
-
       {isEditing ? (
         <View>
           <TextInput
@@ -55,6 +47,22 @@ const Card = ({ card, onEdit, onRemove }) => {
           <Text style={styles.description}>{card.description}</Text>
         </View>
       )}
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop:10
+        }}
+      >
+        <TouchableOpacity onPress={handleEdit} style={styles.editButton}>
+          <Text style={styles.textStyle}>{isEditing ? "Save" : "Edit"}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={handleRemove} style={styles.removeButton}>
+          <Text style={styles.textStyle}>Remove</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -75,8 +83,22 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   editButton: {
-    alignSelf: "flex-end",
+    backgroundColor: "green",
     padding: 5,
+    flexGrow: 1,
+    borderRadius: 8,
+    marginHorizontal: 5,
+  },
+  removeButton: {
+    backgroundColor: "red",
+    padding: 5,
+    flexGrow: 1,
+    borderRadius: 8,
+    marginHorizontal: 5,
+  },
+  textStyle:{
+textAlign:'center',
+color:"#fff"
   },
   input: {
     borderWidth: 1,

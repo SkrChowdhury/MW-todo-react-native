@@ -17,7 +17,7 @@ const Phase = ({
   };
   const handleAddCard = () => {
     const newCard = {
-      id: phase.cards.length + 1,
+      id: phase.cards.length > 0  ? (phase.cards.length + 1) : 0 ,
       title: "Card Name",
       description: "Card Description",
     };
@@ -31,7 +31,7 @@ const Phase = ({
           <Text style={styles.title}>{phase.title}</Text>
           <RnButton
             title="..."
-            color={"#fff"}
+            color={"black"}
             onPress={() => onRemovePhase(phase.id)}
           />
         </View>

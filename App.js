@@ -60,7 +60,7 @@ const App = () => {
   const handleAddCard = (phaseId, newCard) => {
     setPhases((prevPhases) =>
       prevPhases.map((phase) =>
-        phase.id === phaseId ? { ...phase, cards: [...phase.cards, { ...newCard, id: phase.cards.length + 1 }] } : phase
+        phase.id === phaseId ? { ...phase, cards: [...phase.cards, { ...newCard, id: phase.cards?.length + 1 }] } : phase
       )
     );
   };
