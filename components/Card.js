@@ -1,12 +1,47 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-const Card = ({ card}) => {
+const Card = ({ card, onEdit }) => {
+  const [isEditing, setEditing] = useState(false);
+  const [editedTitle, setEditedTitle] = useState(card.title);
+  const [editedDescription, setEditedDescription] = useState(card.description);
+
+  const handleEdit = () => {
+    if (isEditing) {
+      // Save changes and update the card
+      onEdit({ ...card, title: editedTitle, description: editedDescription });
+    }
+    setEditing(!isEditing);
+  };
+
   return (
-      <View style={styles.container}>
+    <View style={styles.container}>
+    <TouchableOpacity onPress={handleEdit} style={styles.editButton}>
+      <Text>{isEditing ? 'Save' : 'Edit'}</Text>
+    </TouchableOpacity>
+
+    {isEditing ? (
+      <View>
+        <TextInput
+          style={styles.input}
+          placeholder="Title"
+          value={editedTitle}
+          onChangeText={setEditedTitle}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Description"
+          value={editedDescription}
+          onChangeText={setEditedDescription}
+        />
+      </View>
+    ) : (
+      <View>
         <Text style={styles.title}>{card.title}</Text>
         <Text style={styles.description}>{card.description}</Text>
       </View>
+    )}
+  </View>
   );
 };
 
@@ -17,14 +52,23 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginVertical: 5,
     backgroundColor: '#ffffff',
-    width: '100%'
+    width: '100%',
   },
   title: {
-    fontSize: 16
+    fontSize: 16,
   },
   description: {
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
+  editButton: {
+    alignSelf: 'flex-end',
+    padding: 5,
+  },
+  input: {
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 5,
+    marginVertical: 5,
+  },
 });
-
 export default Card;
